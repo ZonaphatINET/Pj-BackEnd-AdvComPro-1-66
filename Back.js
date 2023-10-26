@@ -56,12 +56,31 @@ app.get('/ClubOfPlayer/:id', (req, res) => {
 
 app.post('/ClubOfPlayer', (req, res) => {
     const ClubOfPlayer = req.body;
-    db.run('INSERT INTO ClubOfPlayer (PlayerID, ClubID) VALUES (?, ?)', ClubOfPlayer.PlayerID, ClubOfPlayer.ClubID, function (err) {
+    const playerID = ClubOfPlayer.PlayerID;
+    const clubID = ClubOfPlayer.ClubID;
+
+    db.get('SELECT * FROM Player WHERE ID = ?', playerID, (err, player) => {
         if (err) {
             res.status(500).send(err);
+        } else if (!player) {
+            res.status(400).send('ไม่พบข้อมูล Player');
         } else {
-            ClubOfPlayer.PlayerID = this.lastID;
-            res.send(ClubOfPlayer);
+            db.get('SELECT * FROM Club WHERE ID = ?', clubID, (err, club) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else if (!club) {
+                    res.status(400).send('ไม่พบข้อมูล Club');
+                } else {
+                    db.run('INSERT INTO ClubOfPlayer (PlayerID, ClubID) VALUES (?, ?)', playerID, clubID, function (err) {
+                        if (err) {
+                            res.status(500).send(err);
+                        } else {
+                            ClubOfPlayer.PlayerID = this.lastID;
+                            res.send(ClubOfPlayer);
+                        }
+                    });
+                }
+            });
         }
     });
 });

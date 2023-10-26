@@ -29,7 +29,7 @@ db.run(`CREATE TABLE IF NOT EXISTS Club (
     Pic TEXT
 )`);
 
-// CRUD สำหรับ ClubOfPlayer
+// CRUD สำหรับ ClubOfPlayer ///////////////////////////////////////////////////////////////////////////////////////////
 app.get('/ClubOfPlayer', (req, res) => {
     db.all('SELECT * FROM ClubOfPlayer', (err, rows) => {
         if (err) {
@@ -87,7 +87,7 @@ app.delete('/ClubOfPlayer/:id', (req, res) => {
     });
 });
 
-// CRUD สำหรับ Player
+// CRUD สำหรับ Player ///////////////////////////////////////////////////////////////////////////////////////////
 app.get('/Player', (req, res) => {
     db.all('SELECT * FROM Player', (err, rows) => {
         if (err) {
@@ -146,7 +146,7 @@ app.delete('/Player/:id', (req, res) => {
     });
 });
 
-// CRUD สำหรับ Club
+// CRUD สำหรับ Club ///////////////////////////////////////////////////////////////////////////////////////////
 app.get('/Club', (req, res) => {
     db.all('SELECT * FROM Club', (err, rows) => {
         if (err) {

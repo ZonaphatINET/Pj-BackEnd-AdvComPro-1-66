@@ -1,7 +1,24 @@
 {
+  "name": "node-res",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/CRUDBookNoDB.js",
+    "format": "prettier --write *.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.1"
+  },
   "dependencies": {
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "http": "^0.0.1-security",
     "mongoose": "^7.5.3",
     "pg": "^8.11.3",
     "sequelize": "^6.33.0",

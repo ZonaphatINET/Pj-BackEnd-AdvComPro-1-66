@@ -9,7 +9,8 @@ app.use(express.json());
 
 // สร้างตาราง Club of Player
 db.run(`CREATE TABLE IF NOT EXISTS ClubOfPlayer (
-    PlayerID TEXT PRIMARY KEY,
+    ID INTEGER PRIMARY KEY,
+    PlayerID TEXT,
     ClubID TEXT
 )`);
 
@@ -41,7 +42,7 @@ app.get('/ClubOfPlayer', (req, res) => {
 });
 
 app.get('/ClubOfPlayer/:id', (req, res) => {
-    db.get('SELECT * FROM ClubOfPlayer WHERE PlayerID = ?', req.params.id, (err, row) => {
+    db.get('SELECT * FROM ClubOfPlayer WHERE ID = ?', req.params.id, (err, row) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -56,6 +57,7 @@ app.get('/ClubOfPlayer/:id', (req, res) => {
 
 app.post('/ClubOfPlayer', (req, res) => {
     const ClubOfPlayer = req.body;
+    const ID = ClubOfPlayer.ID;
     const playerID = ClubOfPlayer.PlayerID;
     const clubID = ClubOfPlayer.ClubID;
 
